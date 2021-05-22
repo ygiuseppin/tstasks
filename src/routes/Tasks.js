@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
-const checkAuth = require('../../middlewares/check_auth');
+const checkAuth = require('../middlewares/check_auth');
 const TasksController = require('../controllers/Tasks');
 
 // Get all posts
