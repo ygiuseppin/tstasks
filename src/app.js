@@ -7,10 +7,10 @@ require('./utils/prom-server');
 // Create express app
 const app = express();
 app.use(cors());
-app.set('port', 3000);
+app.set('port', 3001);
 
 // Mongo
-mongoose.connect("mongodb://localhost:27017/facebook", {
+mongoose.connect("mongodb://localhost:27017/mydashboard", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
