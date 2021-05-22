@@ -23,13 +23,8 @@ db.once("open", () => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Routes
-app.get("/", (req: any, res: { send: (arg0: string) => void; }) => {
-  res.send("Hello world!");
-});
-
-const PostsRoute = require("./routes/Posts");
-app.use("/posts", PostsRoute);
+const TasksRoute = require("./routes/Tasks");
+app.use("/tasks", TasksRoute);
 const UsersRoute = require("./routes/Users");
 app.use("/user", UsersRoute);
 

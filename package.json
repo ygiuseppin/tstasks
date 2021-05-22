@@ -4,9 +4,10 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "clean": "del /s /q build",
+    "clean": "del build",
+    "build": "tsc",
     "test": "mocha",
-    "start": "nodemon app.js"
+    "start": "nodemon ./src/app.js"
   },
   "author": "",
   "license": "ISC",
