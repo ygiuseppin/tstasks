@@ -10,7 +10,7 @@ router.get('/', checkAuth, TasksController.getAllTasks);
 router.post('/new', checkAuth, TasksController.createNewTask);
 
 // Get one post by id
-//router.get('/get/:id', checkAuth, TasksController.getTaskById);
+router.get('/get/:id', checkAuth, TasksController.getTaskById);
 
 // Delete post 
 router.delete('/delete/:id', checkAuth, TasksController.deleteTask);
