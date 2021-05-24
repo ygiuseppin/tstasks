@@ -12,7 +12,6 @@ register.setDefaultLabels(defaultTags);
 
 class PromClient {
     static counter(name, inc, tags) {
-  
             const counter = counters.find(c => c.name === name);
             if(!counter){
                 const newCounter = new promClient.Counter({

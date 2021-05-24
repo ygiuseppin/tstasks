@@ -1,9 +1,13 @@
 const mongoose = require('mongoose');
 
 const TaskSchema = new mongoose.Schema({
-    content: {
+    title: {
         type: String,
         required: true 
+    },
+    description: {
+        type: String,
+        default: null 
     },
     owner: {
         type: mongoose.Schema.Types.ObjectId,

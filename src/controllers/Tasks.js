@@ -1,11 +1,36 @@
 const Task = require('../models/Tasks');
-// const PromClient = require('../utils/prom-client');
 
 exports.getAllTasks = async (req, res) => {
     try {
-        const tasks = await Task.find({ owner: req.userData.userId });
-        // PromClient.counter('getAllTasks', 1, { type: 'get' });
-        res.json(tasks);    
+        const filter = { owner: req.userData.userId };
+
+        // Query params
+        if (req.query.completed) {
+            filter.completed = req.query.completed;
+        }
+        let sort = req.query.sort || '-completed';
+        let limit = parseInt(req.query.limit) || 100;
+
+        // Find in DB
+        const tasks = await Task.find(filter)
+            .sort(sort)
+            .limit(limit)
+            .select('-owner')
+            .exec();
+
+        // Format
+        const formatTasks = tasks.map(t => {
+            return {
+                id: t._id,
+                title: t.title,
+                description: t.description,
+                created: t.created,
+                expires: t.expires,
+                completed: t.completed
+            }
+        });
+
+        res.json(formatTasks);    
     } catch(err) {
         res.status(500).send({error: err});
     }            
@@ -14,13 +39,14 @@ exports.getAllTasks = async (req, res) => {
 exports.createNewTask = async (req, res) => {
     try {
         const newTask = new Task({
-            content: req.body.content,
+            title: req.body.title,
+            description: req.body.description,
             owner: req.userData.userId,
             completed: false,
             created: new Date(),
             expires: new Date(req.body.expires),
         });
-        const savedTask = await newTask.save(); 
+        const savedTask = await newTask.save();
         res.json({
             message: 'Task created',
             task: savedTask
