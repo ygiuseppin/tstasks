@@ -3,12 +3,10 @@ import {Modal, Form, Button, Col, Row} from 'react-bootstrap';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/style.css";
 import axios from "axios";
-import Cookie from "universal-cookie"
 
 const url = "http://localhost:3001/user/login";
-const cookie = new Cookie();
 
-function Login() {
+function Login(props) {
     
     const [showModal, setModal] = useState(false);
     
@@ -21,37 +19,36 @@ function Login() {
         password:""
     });
 
-    let handlerChange = async e => {
+    const handlerChange = async e => {
         await setForm({
              ...form,
              [e.target.name]: e.target.value
              })
     }
     
-    const loginEvent = async (event) => {
-        event.preventDefault()
-        await axios.post(url, {"email": form.email, "password": form.password })
-         .then(res => {
-            console.log("entre 1")
-            
-            return res.data })
-         .then(data =>{
-             console.log(data)
-            if(data.message === "Auth success"){
-                console.log("entre 2 "+data)
-                cookie.set("token", data.token, {path: "/"});
-                cookie.set("email", form.email, {path: "/"});
-                abrirModal()
+    const loginEvent = async e => {
+        e.preventDefault();
+        try {
+            const res = await axios.post(url, {"email": form.email, "password": form.password });
+            if (res.data.message === "Auth success") {
+                abrirModal();
+                const tasks = await axios.get("http://localhost:3001/tasks", {headers:{'Authorization':`Bearer ${res.data.token}`}});
+                let userOk = {
+                    connect: true,
+                    email: form.email,
+                    token: res.data.token,
+                    tasks: tasks.data
+                };
+                props.loginUser(userOk);
             }
-         })
-         .catch(err => {
-             console.log("error: "+err)
-         })
+        } catch(err) {
+            console.log(err);
+        }
     }
         
         return(
            <> 
-                <button centered="true" onClick={abrirModal}>Login</button>
+                <button className="btn" onClick={abrirModal}>Login</button>
                 <Modal dialogClassName="modal-50w" centered show={showModal} onHide={abrirModal}>
                      
                         <Modal.Header closeButton >
