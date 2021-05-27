@@ -1,6 +1,7 @@
 import React from 'react';
 import Task from "./tasks"
 import AddTask from "./addTasks"
+import axios from "axios";
 
 function ViewTask(props){
     
@@ -21,22 +22,34 @@ function ViewTask(props){
         props.updatingListOfTasks(listOfTasks)
     }
 
-    const editOrAddTask = (task, isEditTask) =>{
+    const editOrAddTask = async (task, isEditTask) =>{
+        const urlAdd ="http://localhost:3001/tasks/new"
+        
         let listOfTasks = props.tasks; //ojo aca, no se si un componente lo acomoda........ojo con el add
         if(isEditTask){
             const index = listOfTasks.findIndex(t => t.id === task.id);
             listOfTasks[index] = task;
             props.updatingListOfTasks(listOfTasks);
         }else{
-            listOfTasks.push(task)
-            props.updatingListOfTasks(listOfTasks)
+            
+            try {
+                const res = await axios.post(urlAdd,{"title":task.title}, {headers:{'Authorization':`Bearer ${props.token}`}});
+                if (res.data.message === "Task created") {
+                    console.log("task creada")
+                    listOfTasks.push(task)
+                    props.updatingListOfTasks(listOfTasks)
+                }
+            } catch(err) {
+                console.log(err);
+            }
+            
         }
     
     }
         
     return(
         <>
-           <div style={{marginBottom:"2%"}}><span className="no-tasks-tittle my-font" >My Tasks</span>
+           <div style={{marginBottom:"2%"}}><span className="no-tasks-title my-font" >My Tasks</span>
            <AddTask token={props.token} editOrAddTask={editOrAddTask} /></div>
            {props.tasks.map(t =>(
                     <div key={t.id} style={{marginTop:"7px"}}>

@@ -14,7 +14,7 @@ function AddTask(props){
         "completed": false,
         "expires": "",
         "id": "",
-        "tittle": "",
+        "title": "",
         "description": "",
         "created": ""
       }

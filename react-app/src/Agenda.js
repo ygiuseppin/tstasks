@@ -30,9 +30,9 @@ function Agenda(){
           <div className="contenedorDeTareas">
            
             {(userState.tasks.length) ? <>
-                                          <ViewTask tasks={userState.tasks} updatingListOfTasks={updatingListOfTasks}/>
+                                          <ViewTask tasks={userState.tasks} token={userState.token}updatingListOfTasks={updatingListOfTasks}/>
                                         </>
-            : <div className="no-tasks-tittle my-font">You don´t have tasks</div>
+            : <div className="no-tasks-title my-font">You don´t have tasks</div>
             }
           </div>
       </>
@@ -50,7 +50,7 @@ const [userState, setUserState] = useState({
         "completed": true,
         "expires": "2021-12-12T03:00:00.000Z",
         "id": "60a8f3fc33962538743cce2b",
-        "tittle": "Mi tarea 1",
+        "title": "Mi tarea 1",
         "description": "Tarea de pepe",
         "created": "2021-05-22T12:07:24.134Z"
       },
@@ -58,7 +58,7 @@ const [userState, setUserState] = useState({
         "completed": false,
         "expires": "2021-03-12T03:00:00.000Z",
         "id": "60a8f3fc33962538743ccb",
-        "tittle": "Mi tarea 2",
+        "title": "Mi tarea 2",
         "description": "Tarea de pepe",
         "created": "2021-05-22T12:07:24.134Z"
     },
@@ -66,7 +66,7 @@ const [userState, setUserState] = useState({
       "completed": true,
       "expires": "2020-12-12T03:00:00.000Z",
       "id": "2538743ccb",
-      "tittle": "Mi tarea 3",
+      "title": "Mi tarea 3",
       "description": "Tarea de p",
       "created": "2021-05-22T12:07:24.134Z"
   },
@@ -74,7 +74,7 @@ const [userState, setUserState] = useState({
       "completed": false,
       "expires": null,
       "id": "60a995f30cb472d9ce",
-      "tittle": "Mi tarea 4",
+      "title": "Mi tarea 4",
       "description": "Tarea de pepe",
       "created": "2021-08-23T07:07:21.982Z"
   }],

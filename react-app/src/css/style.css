@@ -48,7 +48,7 @@
     font-family: cursive;
 }
 
-.tittle-task{
+.title-task{
     
     font-size: 20px;
 }
@@ -67,13 +67,13 @@
     background:rgb(190, 206, 236);
 }
 
-.no-tasks-tittle{
+.no-tasks-title{
     
     font-size: 40px;
     margin-top: 40px;
   }
 
-.tittle-header{
+.title-header{
     
     font-size: 200%;
 }

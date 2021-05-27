@@ -45,7 +45,7 @@ function Task(props){
                                  
                             </div>
                             <div className="col-6 ">
-                                <div className="tittle-task my-font">{props.task.tittle}</div>
+                                <div className="title-task my-font">{props.task.title}</div>
                             </div>
                             <div className="col-3">
                                 {

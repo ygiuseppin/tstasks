@@ -9,7 +9,7 @@ function Header(props){
         <>
             <div className="encabezado navbar">
 
-                <div className="navbar-brand tittle-header my-font">
+                <div className="navbar-brand title-header my-font">
                     My Pending Tasks
                 </div>
                 

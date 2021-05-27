@@ -7,7 +7,7 @@ function PopUpTask(props){
     const [saveMode, setSaveMode] = useState(!props.edit) //si vengo de add va false
     const editOrAddtask_Bool = props.edit;
     const [task, setTask] = useState(props.task);
-    const [validTittle, setvalidTittle] = useState(false)
+    const [validTitle, setvalidTitle] = useState(false)
     const taskEditF = (e) =>{
         setTask({
             ...task,
@@ -21,12 +21,13 @@ function PopUpTask(props){
     }
 
     const setEditOrAddTask = () =>{
-        if(task.tittle.length !== 0){
+        if(task.title.length !== 0){
             props.editOrAddTask(task, editOrAddtask_Bool)
-            props.abrirModal()
+                .then(()=>{props.abrirModal()})
+            
         }
         else{
-            setvalidTittle(!validTittle)
+            setvalidTitle(!validTitle)
         }
     }
 
@@ -39,10 +40,10 @@ function PopUpTask(props){
                             <div className="my-font">
                                 {
                                 saveMode?<div>  
-                                            <input type="text" onChange={taskEditF} name="tittle" placeholder="Add Tittle" value={task.tittle} required/>
-                                            {validTittle?<div><span className="alertPass noOk">Obligatory field</span></div>:<></>}
+                                            <input type="text" onChange={taskEditF} name="title" placeholder="Add Title" value={task.title} required/>
+                                            {validTitle?<div><span className="alertPass noOk">Obligatory field</span></div>:<></>}
                                         </div>
-                                        :<p className="my-font">{task.tittle}</p>
+                                        :<p className="my-font">{task.title}</p>
                                 }
                             </div>
                             

@@ -44,7 +44,7 @@ exports.createNewTask = async (req, res) => {
             owner: req.userData.userId,
             completed: false,
             created: new Date(),
-            expires: new Date(req.body.expires),
+            /*expires: new Date(req.body.expires),*/
         });
         const savedTask = await newTask.save();
         res.json({
