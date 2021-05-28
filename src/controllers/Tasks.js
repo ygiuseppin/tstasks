@@ -38,14 +38,20 @@ exports.getAllTasks = async (req, res) => {
 
 exports.createNewTask = async (req, res) => {
     try {
-        const newTask = new Task({
+        if(!req.body.title) {
+            res.status(400).send({error: "Bad request: title is required"});
+        }
+
+        const taskInfo = {
             title: req.body.title,
-            description: req.body.description,
             owner: req.userData.userId,
             completed: false,
             created: new Date(),
-            /*expires: new Date(req.body.expires),*/
-        });
+            description: req.body.description || null,
+            expires: req.body.expires ? new Date(req.body.expires) : null
+        };
+
+        const newTask = new Task(taskInfo);
         const savedTask = await newTask.save();
         res.json({
             message: 'Task created',
