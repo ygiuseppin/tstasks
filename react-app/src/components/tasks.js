@@ -5,9 +5,12 @@ import PopUpTask from "./popUpTask"
 function Task(props){
    
     const [showModal, setModal] = useState(false);
+    const [taskComplete, setTaskComplete] = useState(props.task.completed)
+    
+            
     
     const abrirModal = (e) =>{
-        
+        console.log(e)
         if(!(e && e.target && e.target.name && [e.target.name][0] ==="checkbox"))
             setModal(!showModal);
     }
@@ -15,6 +18,7 @@ function Task(props){
     const changeCheked = () =>{
        
         props.editCheckTask(props.task.id);
+        setTaskComplete(!taskComplete);
     }
 
     const timeLimit = () =>{
@@ -37,10 +41,13 @@ function Task(props){
                     
                     <div className="my-container">
                         <div className="row ustify-content-lg-center">
-                            <div className="col-1">
+                            <div className="col-2">
     
-                                <div className="checkbox">
-                                    <input type="checkbox" name="checkbox" onClick={changeCheked} defaultChecked={props.task.completed}></input>
+                                <div>
+                                    <input type="checkbox" id={"completar"+props.task.id} onClick={changeCheked} defaultChecked={props.task.completed}></input>
+                                    {taskComplete?<label className="my-font check-Finished" name="checkbox" for={"completar"+props.task.id}>Finished</label>
+                                    :<label className="my-font check-To-complete" name="checkbox" for={"completar"+props.task.id}>To complete</label>
+                                    }
                                 </div>
                                  
                             </div>
@@ -49,13 +56,12 @@ function Task(props){
                             </div>
                             <div className="col-3">
                                 {
-                                (props.task.completed)?<span className="time-expire my-font">Task Completed</span>
-                                    :(!props.task.expires) ? <span></span>
-                                        :(timeLimit() >= 0) ? <div className="time-expire my-font">Expires {moment(props.task.expires).fromNow()}</div>
-                                        : <div className="time-expire my-font">Expired {moment(props.task.expires).fromNow()}</div>
+                                    !props.task.expires ? <span></span>
+                                    :(timeLimit() >= 0) ? <div className="time-expire my-font">Expires {moment(props.task.expires).fromNow()}</div>
+                                                        : <div className="time-expire my-font">Expired {moment(props.task.expires).fromNow()}</div>
                                 }
                             </div>
-                            <div className="col-2">
+                            <div className="col-1">
                                 <div>
                                     <button onClick={deleteTask} className="btn btn-circle btn-delete float-right" type="button"></button>
                                 </div>

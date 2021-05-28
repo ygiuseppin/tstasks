@@ -125,3 +125,46 @@ textarea:read-only {
     outline:none;
     color: black;
   }
+
+input[type="checkbox"]{
+    display: none;
+}
+
+.checkbox label{
+    color: #0074D9;
+    padding: 5px 15px 0px 51px;
+    display: inline-block;
+    position: relative;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor:pointer;
+    animation: all 0.3 ease;
+    -o-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+}
+
+.check-To-complete{
+    color: #0074D9;
+    border-radius: 1110px;
+    display: inline-block;
+    position: relative;
+    font-size: 18px;
+    border-radius: 20px;
+}
+
+.check-To-complete:hover{
+    background: red;
+}
+
+.check-Finished{
+    color: green;
+    border-radius: 1110px;
+    display: inline-block;
+    position: relative;
+    font-size: 18px;
+    border-radius: 20px;
+}
+
+.check-Finished:hover{
+    background: grey;
+}
