@@ -44,8 +44,8 @@ function Task(props){
     
                                 <div>
                                     <input type="checkbox" id={"completar"+props.task.id} onClick={changeCheked} defaultChecked={props.task.completed}></input>
-                                    {taskComplete?<label className="my-font check-Finished" name="checkbox" for={"completar"+props.task.id}>Finished</label>
-                                    :<label className="my-font check-To-complete" name="checkbox" for={"completar"+props.task.id}>To complete</label>
+                                    {taskComplete?<label className="my-font check-Finished" name="checkbox" htmlFor={"completar"+props.task.id}>Finished</label>
+                                                 :<label className="my-font check-To-complete" name="checkbox" htmlFor={"completar"+props.task.id}>To complete</label>
                                     }
                                 </div>
                                  

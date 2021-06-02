@@ -48,14 +48,17 @@ function SingUp() {
         
         try{
             const res = await axios.post(url, {"email": form.email, "password": form.password })
-            
             if(res.data.message === "User created"){
                 setearModal()
                 alert("Usuario creado exitosamente")
             }
         }catch(err){
-            console.log(err);
-            alert("Error al crear usuario "+err)
+            if(err.response.status === 409){
+                alert("Error: Email exists")
+            }
+            else{
+                alert("Error creating user: "+err)
+            }
         }   
     }
     

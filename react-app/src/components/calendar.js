@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {DateTimePickerComponent} from "@syncfusion/ej2-react-calendars";
 
 
@@ -12,7 +12,7 @@ function Calendar(props){
     return(
         <>
             {
-               <DateTimePickerComponent name="dataTime" value={props.expires} placeholder="Choose a date and time" name="expires" onChange={changeDataTime} />
+               <DateTimePickerComponent value={props.expires} placeholder="Choose a date and time" name="expires" onChange={changeDataTime} />
             }
         </>
     );

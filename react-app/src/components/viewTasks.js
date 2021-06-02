@@ -5,10 +5,6 @@ import axios from "axios";
 
 function ViewTask(props){
     
-    const editDataTime = (data, id) =>{
-        
-    }
-    
     const seachForId = (id, list) =>{
             return list.filter(l => l.id !== id)
     }
@@ -33,6 +29,7 @@ function ViewTask(props){
         props.updatingListOfTasks(listOfTasks)
     }
 
+    const editOrAddTask = async (task, taskSv, isEditTask) =>{
         const urlAdd ="http://localhost:3001/tasks/new"
         
         let listOfTasks = props.tasks;
@@ -67,14 +64,19 @@ function ViewTask(props){
         
     return(
         <>
-           <div style={{marginBottom:"2%"}}><span className="no-tasks-title my-font" >My Tasks</span>
-           <AddTask token={props.token} editOrAddTask={editOrAddTask} /></div>
-           {props.tasks.map(t =>(
-                    <div key={t.id} style={{marginTop:"7px"}}>
-                        <Task delTask={deleteTask} task={t} editCheckTask={editCheckTask} editOrAddTask={editOrAddTask}/>  
-                    </div>
-                ))
+           <AddTask token={props.token} editOrAddTask={editOrAddTask} />
+           {props.tasks.length?<div><div style={{marginBottom:"2%"}}><span className="no-tasks-title my-font" >My Tasks</span>
+                                    
+                                </div>
+                                <div>
+                                {props.tasks.map(t =>(
+                                            <div key={t.id} style={{marginTop:"7px"}}>
+                                                <Task delTask={deleteTask} task={t} editCheckTask={editCheckTask} editOrAddTask={editOrAddTask}/>  
+                                            </div>
+                                        ))}</div></div>
+            :<div><span className="no-tasks-title my-font" >You don´t have tasks</span></div>                       
             }
+            
         </>
     );
 }
