@@ -1,17 +1,21 @@
 import React, {useState} from 'react';
 import {Modal, Button, Col, Row} from 'react-bootstrap';
 import moment from "moment"
+import Calendar from "./calendar"
 
 
 
 function PopUpTask(props){
     
-    const [saveMode, setSaveMode] = useState(!props.edit)
+    const [editMode, setSaveMode] = useState(!props.edit)
     const editOrAddtask_Bool = props.edit;
     const [task, setTask] = useState(props.task);
     const [validTitle, setvalidTitle] = useState(false)
     
     const taskEditF = (e) =>{
+        
+        console.log("ahora aca"+[e.target.name])
+        
         setTask({
             ...task,
             [e.target.name]: e.target.value 
@@ -19,7 +23,7 @@ function PopUpTask(props){
     }
     
     const changeToSaveMode = () =>{
-        setSaveMode(!saveMode)
+        setSaveMode(!editMode)
     }
 
     const setEditOrAddTask = () =>{
@@ -50,11 +54,11 @@ function PopUpTask(props){
                         <Modal.Title>
                             <div className="my-font">
                                 {
-                                saveMode?<div>  
-                                            <input type="text" onChange={taskEditF} name="title" placeholder="Add Title" value={task.title} required/>
+                                editMode?<div>  
+                                            <input className="titlePopUpStyle" type="text" onChange={taskEditF} name="title" placeholder="Add Title" value={task.title} required/>
                                             {validTitle?<div><span className="alertPass noOk">Obligatory field</span></div>:<></>}
                                         </div>
-                                        :<p className="my-font">{task.title}</p>
+                                        :<p className="my-font titlePopUpStyle">{task.title}</p>
                                 }
                             </div>
                             
@@ -65,32 +69,29 @@ function PopUpTask(props){
                         <Row className="justify-content-md-center">
                             <Col md={12}>
                                 {
-                                    saveMode? <div className="form-group">
-                                                    <textarea className="form-control" onChange={taskEditF} name="description" placeholder="Add Description"  value={task.description} rows="2"></textarea>
+                                    editMode? <div className="form-group">
+                                                    <textarea className="form-control texAreaStyle" onChange={taskEditF} name="description" placeholder="Add Description"  value={task.description} rows="2"></textarea>
                                                 </div>
-                                            :<p className="my-font">{task.description}</p>
+                                            :<p className="my-font texAreaStyle">{task.description}</p>
                                 }
                             </Col>
                         </Row>
                     </div>
                     <div>
                     {
-                        saveMode?<Row className="justify-content-md-center">
-                                    <Col md={11}>
-                                        <input type="date" value={task.expires}/>
+                        editMode?<Row className="justify-content-md-center">
+                                    <Col md={5}>
+                                        <Calendar setDataTime={taskEditF} expires={task.expires}/>
                                     </Col>
-                                    <Col md={1}>
-                                            <span></span>
+                                    <Col md={7}>
+                                            <></>
                                     </Col>
                                 </Row>
                                 :<Row className="justify-content-md-center">
                                         <Col md={11}>
                                         {
-                                            task.expire? <p></p>
-                                                        :<p className="my-font">Time to expire: {moment(task.expires).format("MMMM Do YYYY")}</p>
-                                                        
-                                                       
-
+                                            !task.expires ?<></>
+                                                          :<p className="my-font">Time to expire: {moment(task.expires).format("MMMM Do YYYY")}</p>
                                         }
                                         </Col>
                                         <Col md={1}>
@@ -103,7 +104,7 @@ function PopUpTask(props){
                     </Modal.Body>
                     <Modal.Footer>
                     {
-                        (saveMode) ? <Button className="btn" type="button" onClick={setEditOrAddTask}>Save</Button>
+                        (editMode) ? <Button className="btn" type="button" onClick={setEditOrAddTask}>Save</Button>
                         :<Button className="btn" type="button" onClick={changeToSaveMode}>Edit</Button>
                     }
                     </Modal.Footer>

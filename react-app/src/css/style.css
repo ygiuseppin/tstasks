@@ -1,3 +1,5 @@
+@import url("https://cdn.syncfusion.com/ej2/material.css");
+
 .modal-60w{
     width: 35%;
     max-width: none !important;
@@ -164,4 +166,12 @@ input[type="checkbox"]{
 
 .check-Finished:hover{
     background: rgb(150, 200, 150);
+}
+
+.texAreaStyle{
+    font-size: 30px;
+}
+
+.titlePopUpStyle{
+    font-size: 45px;
 }

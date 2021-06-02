@@ -5,7 +5,11 @@ import axios from "axios";
 
 function ViewTask(props){
     
-    const deleteForId = (id, list) =>{
+    const editDataTime = (data, id) =>{
+        
+    }
+    
+    const seachForId = (id, list) =>{
             return list.filter(l => l.id !== id)
     }
     
@@ -14,12 +18,12 @@ function ViewTask(props){
             const res = await axios.delete("http://localhost:3001/tasks/delete/"+id_task, {headers:{'Authorization':`Bearer ${props.token}`}});
             if(res.data.message === "Task deleted"){
                 let listOfTasks = props.tasks;
-                listOfTasks = deleteForId(id_task, listOfTasks)
+                listOfTasks = seachForId(id_task, listOfTasks)
                 props.updatingListOfTasks(listOfTasks)
             }
         }catch(err){
             console.log(err);
-        }    
+        }
     }
 
     const editCheckTask = (id_task) =>{
@@ -29,13 +33,12 @@ function ViewTask(props){
         props.updatingListOfTasks(listOfTasks)
     }
 
-    const editOrAddTask = async (task, taskSv,isEditTask) =>{
         const urlAdd ="http://localhost:3001/tasks/new"
         
         let listOfTasks = props.tasks;
         if(isEditTask){
             try {
-                console.log("entre a la edicion")
+                
                 const res = await axios.patch("http://localhost:3001/tasks/update/"+task.id, taskSv, {headers:{'Authorization':`Bearer ${props.token}`}});
                 if(res.data.message === "Task updated"){
                     const index = listOfTasks.findIndex(t => t.id === task.id);
@@ -72,7 +75,6 @@ function ViewTask(props){
                     </div>
                 ))
             }
-            {console.log(props.tasks)}
         </>
     );
 }

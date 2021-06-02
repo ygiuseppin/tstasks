@@ -28,11 +28,12 @@ function Agenda(){
       <>
           <Header user={userState} setUserState={changeUserState}/>
           <div className="contenedorDeTareas">
-           
-            {(userState.tasks.length) ? <>
-                                          <ViewTask tasks={userState.tasks} token={userState.token}updatingListOfTasks={updatingListOfTasks}/>
-                                        </>
-            : <div className="no-tasks-title my-font">You don´t have tasks</div>
+            {!userState.connect ? <div className="no-tasks-title my-font">Login to see your tasks</div>
+            :
+              (userState.tasks.length) ? <>
+                                            <ViewTask tasks={userState.tasks} token={userState.token}updatingListOfTasks={updatingListOfTasks}/>
+                                          </>
+              : <div className="no-tasks-title my-font">You don´t have tasks</div>
             }
           </div>
       </>

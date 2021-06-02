@@ -10,7 +10,6 @@ function Task(props){
             
     
     const abrirModal = (e) =>{
-        console.log(e)
         if(!(e && e.target && e.target.name && [e.target.name][0] ==="checkbox"))
             setModal(!showModal);
     }
