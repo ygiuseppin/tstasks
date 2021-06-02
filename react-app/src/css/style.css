@@ -86,7 +86,7 @@
   }
 
 .btn-add:hover{
-    background-color:rgb(104, 179, 104);
+    background-color:rgb(150, 200, 150);
   }
 
 .btn-delete{
@@ -95,7 +95,7 @@
 }
 
 .btn-delete:hover{
-    background-color: rgb(224, 117, 117);
+    background-color: rgb(200, 165, 165);
 }
 
 .btn-edit{
@@ -138,9 +138,6 @@ input[type="checkbox"]{
     font-size: 18px;
     border-radius: 8px;
     cursor:pointer;
-    animation: all 0.3 ease;
-    -o-transition: all 0.3 ease;
-    transition: all 0.3 ease;
 }
 
 .check-To-complete{
@@ -149,11 +146,11 @@ input[type="checkbox"]{
     display: inline-block;
     position: relative;
     font-size: 18px;
-    border-radius: 20px;
+    border-radius: 8px;
 }
 
 .check-To-complete:hover{
-    background: red;
+    background: rgb(200, 165, 165);
 }
 
 .check-Finished{
@@ -166,5 +163,5 @@ input[type="checkbox"]{
 }
 
 .check-Finished:hover{
-    background: grey;
+    background: rgb(150, 200, 150);
 }

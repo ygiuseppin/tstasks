@@ -56,9 +56,10 @@ function Task(props){
                             </div>
                             <div className="col-3">
                                 {
-                                    !props.task.expires ? <span></span>
-                                    :(timeLimit() >= 0) ? <div className="time-expire my-font">Expires {moment(props.task.expires).fromNow()}</div>
-                                                        : <div className="time-expire my-font">Expired {moment(props.task.expires).fromNow()}</div>
+                                    props.task.completed?<span></span>
+                                        :!props.task.expires ? <span></span>
+                                        :(timeLimit() >= 0) ? <div className="time-expire my-font">Expires {moment(props.task.expires).fromNow()}</div>
+                                                            : <div className="time-expire my-font">Expired {moment(props.task.expires).fromNow()}</div>
                                 }
                             </div>
                             <div className="col-1">

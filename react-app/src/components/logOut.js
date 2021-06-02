@@ -13,9 +13,9 @@ function LogOut(props){
 
     return(
         <>
-            <div className="navbar-brand">
-                <h6>Bienvenid@ {props.userEmail.substr(0, props.userEmail.indexOf("@"))}</h6>
-                <button className="btn" onClick={userLogOut}>Log Out</button>
+            <div className="navbar-brand" >
+                <h6 >Welcome, {props.userEmail.substr(0, props.userEmail.indexOf("@"))}</h6>
+                <button  className="btn" onClick={userLogOut}>Log Out</button>
             </div>
         </>
     );

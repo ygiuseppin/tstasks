@@ -2,12 +2,15 @@ import React, {useState} from 'react';
 import {Modal, Button, Col, Row} from 'react-bootstrap';
 import moment from "moment"
 
+
+
 function PopUpTask(props){
     
-    const [saveMode, setSaveMode] = useState(!props.edit) //si vengo de add va false
+    const [saveMode, setSaveMode] = useState(!props.edit)
     const editOrAddtask_Bool = props.edit;
     const [task, setTask] = useState(props.task);
     const [validTitle, setvalidTitle] = useState(false)
+    
     const taskEditF = (e) =>{
         setTask({
             ...task,
@@ -16,19 +19,27 @@ function PopUpTask(props){
     }
     
     const changeToSaveMode = () =>{
-       
         setSaveMode(!saveMode)
     }
 
     const setEditOrAddTask = () =>{
         if(task.title.length !== 0){
-            props.editOrAddTask(task, editOrAddtask_Bool)
+            const taskSv = whatChange(task);
+            props.editOrAddTask(task, taskSv, editOrAddtask_Bool)
                 .then(()=>{props.abrirModal()})
-            
         }
         else{
             setvalidTitle(!validTitle)
         }
+    }
+
+    const whatChange = (task) =>{
+        let taskSv = {};
+        if(task.title !== props.task.title) taskSv.title = task.title;
+        if(task.description !== props.task.description) taskSv.description = task.description;
+        if(task.completed !== props.task.completed) taskSv.completed = task.completed;
+        if(task.expires !== props.task.expires) taskSv.expires = task.expires;
+        return taskSv;
     }
 
     return(
@@ -68,18 +79,17 @@ function PopUpTask(props){
                                     <Col md={11}>
                                         <input type="date" value={task.expires}/>
                                     </Col>
-                                    
                                     <Col md={1}>
-                                        <div className="checkbox">
-                                            <input type="checkbox" ></input>
-                                        </div>
+                                            <span></span>
                                     </Col>
                                 </Row>
                                 :<Row className="justify-content-md-center">
                                         <Col md={11}>
                                         {
                                             task.expire? <p></p>
-                                                        :<p className="my-font">Time Expire: {moment(task.expires).format("MMMM Do YYYY")}</p>
+                                                        :<p className="my-font">Time to expire: {moment(task.expires).format("MMMM Do YYYY")}</p>
+                                                        
+                                                       
 
                                         }
                                         </Col>

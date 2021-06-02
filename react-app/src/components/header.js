@@ -21,7 +21,7 @@ function Header(props){
                         </>
                     
                     :   <>
-                        <LogOut userEmail={props.user.email} logoutUser={props.setUserState}/>
+                            <LogOut userEmail={props.user.email} logoutUser={props.setUserState}/>
                         </>    
                     }
                 </div>

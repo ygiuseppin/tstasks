@@ -39,7 +39,6 @@ function Login(props) {
                     token: res.data.token,
                     tasks: tasks.data
                 };
-                console.log(userOk.token)
                 props.loginUser(userOk);
             }
         } catch(err) {
