@@ -12,10 +12,7 @@ function PopUpTask(props){
     const [task, setTask] = useState(props.task);
     const [validTitle, setvalidTitle] = useState(false)
     
-    const taskEditF = (e) =>{
-        
-        console.log("ahora aca"+[e.target.name])
-        
+    const taskEditF = (e) =>{      
         setTask({
             ...task,
             [e.target.name]: e.target.value 

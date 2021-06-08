@@ -5,7 +5,6 @@ import {DateTimePickerComponent} from "@syncfusion/ej2-react-calendars";
 function Calendar(props){
     
     const changeDataTime = (e) =>{
-        console.log("entre al event desde changeDataTime")
         props.setDataTime(e)
     }
 

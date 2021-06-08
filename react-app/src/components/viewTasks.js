@@ -31,12 +31,12 @@ function ViewTask(props){
 
     const editOrAddTask = async (task, taskSv, isEditTask) =>{
         const urlAdd ="http://localhost:3001/tasks/new"
-        
+        const urlUpdate = "http://localhost:3001/tasks/update/"
         let listOfTasks = props.tasks;
         if(isEditTask){
             try {
                 
-                const res = await axios.patch("http://localhost:3001/tasks/update/"+task.id, taskSv, {headers:{'Authorization':`Bearer ${props.token}`}});
+                const res = await axios.patch(urlUpdate+task.id, taskSv, {headers:{'Authorization':`Bearer ${props.token}`}});
                 if(res.data.message === "Task updated"){
                     const index = listOfTasks.findIndex(t => t.id === task.id);
                     listOfTasks[index] = task;
@@ -51,8 +51,9 @@ function ViewTask(props){
             try {
                 const res = await axios.post(urlAdd,{"title":task.title}, {headers:{'Authorization':`Bearer ${props.token}`}});
                 if (res.data.message === "Task created") {
-                    listOfTasks.push(task)
-                    props.updatingListOfTasks(listOfTasks)
+                    task.id = res.data.task._id;
+                    listOfTasks.push(task);
+                    props.updatingListOfTasks(listOfTasks);
                 }
             } catch(err) {
                 console.log(err);
